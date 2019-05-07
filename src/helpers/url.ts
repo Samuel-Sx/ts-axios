@@ -60,20 +60,19 @@ export function buildUrl(url: string, params?: any): string {
       }
       parts.push(`${encode(key)}=${encode(val)}`)
     })
-
-    /**
-     * 将转换好的参数字符串数组使用&符号拼接为完整字符串
-     * 判断url是否存在hash，如果存在，将hash过滤
-     * 判断url是否已经存在参数，如果存在，则使用&连接，否则使用？连接
-     */
-    let serializedParams = parts.join('&')
-    if (serializedParams) {
-      const hashIndex = url.indexOf('#')
-      if (hashIndex > -1) {
-        url = url.slice(0, hashIndex)
-      }
-      url += (url.indexOf('?') > -1 ? '&' : '?') + serializedParams
-    }
-    return url
   })
+  /**
+   * 将转换好的参数字符串数组使用&符号拼接为完整字符串
+   * 判断url是否存在hash，如果存在，将hash过滤
+   * 判断url是否已经存在参数，如果存在，则使用&连接，否则使用？连接
+   */
+  let serializedParams = parts.join('&')
+  if (serializedParams) {
+    const hashIndex = url.indexOf('#')
+    if (hashIndex > -1) {
+      url = url.slice(0, hashIndex)
+    }
+    url += (url.indexOf('?') > -1 ? '&' : '?') + serializedParams
+  }
+  return url
 }
